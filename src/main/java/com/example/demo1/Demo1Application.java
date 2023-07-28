@@ -12,9 +12,16 @@ public class Demo1Application {
 		UsuarioRepository repo = context.getBean(UsuarioRepository.class);
 		System.out.println("El numero de usuarios en la base de datos es: " + repo.count());
 		Usuario user1 = new Usuario(41312139, "Santi Sabbioni", "santisabb@gmail.com", 440934 , 0);
+		Usuario user2 = new Usuario(2872023, "Julio Agosto", "julio@gmail.com", 123456 , 0);
+
 		repo.save(user1);
+		repo.save(user2);
 		System.out.println("El numero de usuarios en la base de datos es: " + repo.count());
 		System.out.println(repo.findAll());
+
+		repo.deleteAll();
+		System.out.println(repo.findAll());
+		System.out.println("Ahora la cantidad de usuarios es: " + repo.count());
 	}
 
 }
