@@ -1,5 +1,7 @@
 package com.example.demo1;
 
+import com.example.demo1.entidades.Usuario;
+import com.example.demo1.repositorios.UsuarioRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
