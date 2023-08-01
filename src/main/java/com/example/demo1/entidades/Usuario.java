@@ -23,7 +23,7 @@ public class Usuario {
         this.cantReservas = cantReservas;
     }
     public Usuario(){}
-    public long getNroDni() {
+    public Long getNroDni() {
         return nroDni;
     }
 
