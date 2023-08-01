@@ -3,10 +3,7 @@ package com.example.demo1.controladores;
 import com.example.demo1.entidades.Usuario;
 import com.example.demo1.repositorios.UsuarioRepository;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,10 +28,10 @@ public class ControladorUsuario {
         return opcUsuario.map(ResponseEntity ::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/api/usuarios")
-    public Usuario crear(@RequestBody Usuario usuario){
-
+    @PostMapping("/api/usuarios")
+    public Usuario crear(@RequestBody Usuario usuario) {
         return usuarioRepo.save(usuario);
     }
+
 
 }
