@@ -21,9 +21,6 @@ public class Demo1Application {
 		System.out.println("El numero de usuarios en la base de datos es: " + repo.count());
 		System.out.println(repo.findAll());
 
-		repo.deleteAll();
-		System.out.println(repo.findAll());
-		System.out.println("Ahora la cantidad de usuarios es: " + repo.count());
 	}
 
 }
