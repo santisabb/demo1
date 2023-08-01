@@ -34,7 +34,7 @@ public class ControladorUsuario {
     @PostMapping("/api/usuarios")
     public ResponseEntity<Usuario> crear(@RequestBody Usuario usuario) {
         if (usuario.getNroDni() != null) {
-            log.warn("intentando crear crear usuario con dni existente");
+            log.warn("intentando crear usuario con dni existente");
             return ResponseEntity.badRequest().build();
         }
         Usuario resultado = usuarioRepo.save(usuario);
@@ -44,12 +44,12 @@ public class ControladorUsuario {
     @PutMapping("/api/usuarios")
     public ResponseEntity<Usuario> actualizarUsuario(@RequestBody Usuario usuario) {
         if (usuario.getNroDni() == null) {
-            log.warn("intentando crear un usuario inexistente");
+            log.warn("intentando actualizar un usuario inexistente");
             return ResponseEntity.badRequest().build();
         }
 
         if (!usuarioRepo.existsById(usuario.getNroDni())) {
-            log.warn("intentando crear un usuario inexistente");
+            log.warn("intentando actualizar un usuario inexistente");
             return ResponseEntity.badRequest().build();
         }
         Usuario resultado = usuarioRepo.save(usuario);
