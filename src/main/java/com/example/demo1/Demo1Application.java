@@ -11,6 +11,7 @@ public class Demo1Application {
 
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(Demo1Application.class, args);
+		//long lng = 1234567891;
 		UsuarioRepository repo = context.getBean(UsuarioRepository.class);
 		System.out.println("El numero de usuarios en la base de datos es: " + repo.count());
 		Usuario user1 = new Usuario(41312139, "Santi Sabbioni", "santisabb@gmail.com", 440934 , 0);

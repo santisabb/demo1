@@ -4,6 +4,7 @@ import com.example.demo1.entidades.Usuario;
 import com.example.demo1.repositorios.UsuarioRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,8 +33,8 @@ public class ControladorUsuario {
     }
 
     @PostMapping("/api/usuarios")
-    public ResponseEntity<Usuario> crear(@RequestBody Usuario usuario) {
-        if (usuario.getNroDni() != null) {
+    public ResponseEntity<Usuario> crear(@RequestBody Usuario usuario, @RequestHeader HttpHeaders headers) {
+        if (usuario.getNroDni() == null) {
             log.warn("intentando crear usuario con dni existente");
             return ResponseEntity.badRequest().build();
         }
@@ -54,6 +55,13 @@ public class ControladorUsuario {
         }
         Usuario resultado = usuarioRepo.save(usuario);
         return ResponseEntity.ok(resultado);
+    }
+
+    @DeleteMapping("api/usuarios")
+    public ResponseEntity<Usuario> deleteAll (@RequestBody Usuario usuario) {
+        log.info("REST Request for delete all users");
+        usuarioRepo.deleteAll();
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/api/usuarios/{dni}")
