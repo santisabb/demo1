@@ -23,9 +23,9 @@ public class ControladorEmpleado {
 
     @PostMapping("/api/empleados")
     public ResponseEntity<Empleado> crear (@RequestBody Empleado empleado , @RequestHeader HttpHeaders headers){
-        if (empleado.getIdEmpleado() != null){
-            log.warn("intentando crear usuario con ID existente");
-            System.out.println("intentando crear usuario con ID existente");
+        if (empleado.getIdEmpleado() == null){
+            log.warn("intentando crear empelado con ID existente");
+            System.out.println("intentando crear empleado con ID existente");
             return ResponseEntity.badRequest().build();
         }
         Empleado result = empleadoRepo.save(empleado);
@@ -62,7 +62,7 @@ public class ControladorEmpleado {
         }
 
         if (!empleadoRepo.existsById(empleado.getIdEmpleado())) {
-            log.warn("intentando actualizar un usuario inexistente");
+            log.warn("intentando actualizar un empleado inexistente");
             return ResponseEntity.badRequest().build();
         }
         Empleado resultado = empleadoRepo.save(empleado);
