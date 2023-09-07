@@ -15,12 +15,14 @@ public class Cancha {
     private String tipoCancha;
     private String medidas;
     private boolean estado;
+    private String tipoCesped;
 
-    public Cancha(int idCancha, String tipoCancha, String medidas, boolean estado) {
+    public Cancha(int idCancha, String tipoCancha, String medidas, boolean estado, String tipoCesped) {
         this.idCancha = idCancha;
         this.tipoCancha = tipoCancha;
         this.medidas = medidas;
         this.estado = estado;
+        this.tipoCesped = tipoCesped;
     }
 
     public Cancha(){}
@@ -56,12 +58,21 @@ public class Cancha {
         this.estado = estado;
     }
 
+    public String getTipoCesped() {
+        return tipoCesped;
+    }
+
+    public void setTipoCesped(String tipoCesped) {
+        this.tipoCesped = tipoCesped;
+    }
+
     @Override
     public String toString() {
         return "Cancha{" +
                 ", idCancha=" + idCancha +
                 ", medidas=" + medidas +
                 ", estado=" + estado +
+                ", tipoCesped=" + tipoCesped +
                 "}";
     }
 }
