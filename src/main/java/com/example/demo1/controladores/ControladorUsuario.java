@@ -35,10 +35,6 @@ public class ControladorUsuario {
 
     @PostMapping("/api/usuarios")
     public ResponseEntity<Usuario> crear(@RequestBody Usuario usuario, @RequestHeader HttpHeaders headers) {
-        if (usuario.getNroDni() == null) {
-            log.warn("intentando crear usuario con dni existente");
-            return ResponseEntity.badRequest().build();
-        }
         Usuario resultado = usuarioRepo.save(usuario);
         return ResponseEntity.ok(resultado);
     }
