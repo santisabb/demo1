@@ -4,6 +4,7 @@ import com.example.demo1.entidades.Usuario;
 import com.example.demo1.repositorios.UsuarioRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springdoc.api.OpenApiResourceNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,8 +43,8 @@ public class ControladorUsuario {
         return ResponseEntity.ok(resultado);
     }
 
-    @PutMapping("/api/usuarios")
-    public ResponseEntity<Usuario> actualizarUsuario(@RequestBody Usuario usuario) {
+    @PutMapping("/api/usuarios/{dni}")
+    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long dni, @RequestBody Usuario usuario) {
         if (usuario.getNroDni() == null) {
             log.warn("intentando actualizar un usuario inexistente");
             return ResponseEntity.badRequest().build();
@@ -57,18 +58,10 @@ public class ControladorUsuario {
         return ResponseEntity.ok(resultado);
     }
 
-    @DeleteMapping("api/usuarios")
-    public ResponseEntity<Usuario> deleteAll (@RequestBody Usuario usuario) {
-        log.info("REST Request for delete all users");
-        usuarioRepo.deleteAll();
-        return ResponseEntity.noContent().build();
-    }
-
     @DeleteMapping("/api/usuarios/{dni}")
     public ResponseEntity<Usuario> borrarUsuario (@PathVariable Long dni){
-        if (usuarioRepo.existsById(dni)){
-            return ResponseEntity.notFound().build();
-        }
+        Usuario usuario = usuarioRepo.findById(dni)
+                .orElseThrow(() -> new OpenApiResourceNotFoundException("User not found"));
 
         usuarioRepo.deleteById(dni);
 

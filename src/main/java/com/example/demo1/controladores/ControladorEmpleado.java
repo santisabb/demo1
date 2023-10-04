@@ -6,6 +6,7 @@ import com.example.demo1.entidades.Usuario;
 import com.example.demo1.repositorios.EmpleadoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springdoc.api.OpenApiResourceNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,17 +45,16 @@ public class ControladorEmpleado {
 
     @DeleteMapping("/api/empleados/{id}")
     public ResponseEntity<Empleado> borrarEmplado(@PathVariable Long id){
-        if(empleadoRepo.existsById(id)){
-            return ResponseEntity.notFound().build();
-        }
+        Empleado empleado = empleadoRepo.findById(id).
+                orElseThrow(() -> new OpenApiResourceNotFoundException("Employee not found"));
 
         empleadoRepo.deleteById(id);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(empleado);
     }
 
     @PutMapping("/api/empleados/{id}")
-    public ResponseEntity<Empleado> modEmpleado(@RequestBody Empleado empleado){
+    public ResponseEntity<Empleado> modEmpleado(@PathVariable Long idEmpleado, @RequestBody Empleado empleado){
         if(empleado.getIdEmpleado() == null){
             log.warn("intentando modificar un empleado inexistente");
             System.out.println("intentando modificar un empleado inexistente");
