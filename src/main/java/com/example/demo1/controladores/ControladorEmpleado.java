@@ -53,7 +53,7 @@ public class ControladorEmpleado {
         return ResponseEntity.ok(empleado);
     }
 
-    @PutMapping("/api/empleados/{id}")
+    @PutMapping("/api/empleados/{idEmpleado}")
     public ResponseEntity<Empleado> modEmpleado(@PathVariable Long idEmpleado, @RequestBody Empleado empleado){
         if(empleado.getIdEmpleado() == null){
             log.warn("intentando modificar un empleado inexistente");
